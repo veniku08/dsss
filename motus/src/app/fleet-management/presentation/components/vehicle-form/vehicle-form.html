@@ -1,0 +1,34 @@
+<form (ngSubmit)="onSubmit()" #form="ngForm" class="form-grid">
+  <div class="form-group">
+    <label>{{ 'fleet.plate' | translate }}</label>
+    <input type="text" [(ngModel)]="vehicle.plate" name="plate" required placeholder="ABC-123">
+  </div>
+  <div class="form-group">
+    <label>{{ 'fleet.brand' | translate }}</label>
+    <input type="text" [(ngModel)]="vehicle.brand" name="brand" required placeholder="Toyota">
+  </div>
+  <div class="form-group">
+    <label>{{ 'fleet.model' | translate }}</label>
+    <input type="text" [(ngModel)]="vehicle.model" name="model" required placeholder="Hiace">
+  </div>
+  <div class="form-group">
+    <label>{{ 'fleet.year' | translate }}</label>
+    <input type="number" [(ngModel)]="vehicle.year" name="year" required min="1990" max="2030">
+  </div>
+  <div class="form-group">
+    <label>{{ 'fleet.odometer' | translate }} (km)</label>
+    <input type="number" [(ngModel)]="vehicle.odometer" name="odometer" required min="0">
+  </div>
+  <div class="form-group">
+    <label>{{ 'fleet.status' | translate }}</label>
+    <select [(ngModel)]="vehicle.status" name="status" required>
+      <option value="AVAILABLE">{{ 'fleet.status-available' | translate }}</option>
+      <option value="IN_MAINTENANCE">{{ 'fleet.status-in-maintenance' | translate }}</option>
+      <option value="OUT_OF_SERVICE">{{ 'fleet.status-out-of-service' | translate }}</option>
+    </select>
+  </div>
+  <div class="form-actions">
+    <button type="button" class="btn-cancel" (click)="onCancel()">{{ 'common.cancel' | translate }}</button>
+    <button type="submit" class="btn-save" [disabled]="!form.valid">{{ 'common.save' | translate }}</button>
+  </div>
+</form>

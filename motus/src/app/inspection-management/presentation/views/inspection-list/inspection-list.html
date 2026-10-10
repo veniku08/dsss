@@ -1,0 +1,64 @@
+<div class="inspection-container">
+  <div class="page-header">
+    <div>
+      <h2>{{ 'inspections.list-title' | translate }}</h2>
+      <p class="subtitle">{{ 'inspections.subtitle' | translate }}</p>
+    </div>
+    <button class="btn-primary" (click)="openCreate()">
+      + {{ 'inspections.register' | translate }}
+    </button>
+  </div>
+
+  <div class="toolbar">
+    <input
+      type="text"
+      class="search-input"
+      [placeholder]="'common.search' | translate"
+      [(ngModel)]="searchTerm"
+      (input)="applyFilters()">
+  </div>
+
+  <table class="data-table">
+    <thead>
+    <tr>
+      <th>{{ 'inspections.vehicle' | translate }}</th>
+      <th>{{ 'inspections.inspector' | translate }}</th>
+      <th>{{ 'inspections.date' | translate }}</th>
+      <th>{{ 'inspections.result' | translate }}</th>
+      <th>{{ 'inspections.observations' | translate }}</th>
+      <th>{{ 'common.actions' | translate }}</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let i of filteredInspections">
+      <td>#{{ i.vehicleId }}</td>
+      <td>#{{ i.inspectorId }}</td>
+      <td>{{ i.date | date:'short' }}</td>
+      <td>
+          <span class="badge" [ngClass]="getPassedCount(i) === i.items.length ? 'success' : 'warning'">
+            {{ getPassedCount(i) }}/{{ i.items.length }} OK
+          </span>
+      </td>
+      <td class="truncate">{{ i.observations || '—' }}</td>
+      <td class="actions">
+        <button class="btn-icon edit" (click)="openEdit(i)" [title]="'common.edit' | translate">✏️</button>
+        <button class="btn-icon delete" (click)="delete(i.id)" [title]="'common.delete' | translate">🗑️</button>
+      </td>
+    </tr>
+    <tr *ngIf="filteredInspections.length === 0">
+      <td colspan="6" class="empty-state">{{ 'inspections.empty' | translate }}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<app-dialog
+  [title]="(editingInspection.id === 0 ? 'inspections.new-title' : 'inspections.edit-title') | translate"
+  [visible]="showDialog"
+  (close)="close()">
+  <app-inspection-form
+    [inspection]="editingInspection"
+    (save)="save($event)"
+    (cancel)="close()">
+  </app-inspection-form>
+</app-dialog>

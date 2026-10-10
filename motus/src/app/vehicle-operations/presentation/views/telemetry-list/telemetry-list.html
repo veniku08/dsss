@@ -1,0 +1,66 @@
+<div class="telemetry-container">
+  <div class="page-header">
+    <div>
+      <h2>{{ 'telemetry.list-title' | translate }}</h2>
+      <p class="subtitle">{{ 'telemetry.subtitle' | translate }}</p>
+    </div>
+    <button class="btn-primary" (click)="openCreate()">
+      + {{ 'telemetry.register' | translate }}
+    </button>
+  </div>
+
+  <div class="toolbar">
+    <input
+      type="text"
+      class="search-input"
+      [placeholder]="'common.search' | translate"
+      [(ngModel)]="searchTerm"
+      (input)="applyFilters()">
+  </div>
+
+  <table class="data-table">
+    <thead>
+    <tr>
+      <th>{{ 'telemetry.vehicle' | translate }}</th>
+      <th>{{ 'telemetry.timestamp' | translate }}</th>
+      <th>{{ 'telemetry.location' | translate }}</th>
+      <th>{{ 'telemetry.speed' | translate }}</th>
+      <th>{{ 'telemetry.fuel' | translate }}</th>
+      <th>{{ 'telemetry.temp' | translate }}</th>
+      <th>{{ 'common.actions' | translate }}</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let r of filteredRecords">
+      <td>#{{ r.vehicleId }}</td>
+      <td>{{ r.timestamp | date:'short' }}</td>
+      <td class="coords">{{ r.latitude | number:'1.4-4' }}, {{ r.longitude | number:'1.4-4' }}</td>
+      <td>{{ r.speed }} km/h</td>
+      <td>
+        <span class="badge" [ngClass]="getFuelClass(r.fuelLevel)">{{ r.fuelLevel }}%</span>
+      </td>
+      <td>
+        <span class="badge" [ngClass]="getTempClass(r.engineTemperature)">{{ r.engineTemperature }}°C</span>
+      </td>
+      <td class="actions">
+        <button class="btn-icon edit" (click)="openEdit(r)" [title]="'common.edit' | translate">✏️</button>
+        <button class="btn-icon delete" (click)="delete(r.id)" [title]="'common.delete' | translate">🗑️</button>
+      </td>
+    </tr>
+    <tr *ngIf="filteredRecords.length === 0">
+      <td colspan="7" class="empty-state">{{ 'telemetry.empty' | translate }}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<app-dialog
+  [title]="(editingRecord.id === 0 ? 'telemetry.new-title' : 'telemetry.edit-title') | translate"
+  [visible]="showDialog"
+  (close)="close()">
+  <app-telemetry-form
+    [record]="editingRecord"
+    (save)="save($event)"
+    (cancel)="close()">
+  </app-telemetry-form>
+</app-dialog>

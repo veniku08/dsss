@@ -1,0 +1,154 @@
+{
+  "vehicles": [
+    {
+      "id": 1,
+      "plate": "ABC-123",
+      "brand": "Toyota",
+      "model": "Hiace",
+      "year": 2020,
+      "odometer": 45000,
+      "status": "AVAILABLE"
+    },
+    {
+      "id": 2,
+      "plate": "XYZ-789",
+      "brand": "Hyundai",
+      "model": "Porter",
+      "year": 2019,
+      "odometer": 82000,
+      "status": "IN_MAINTENANCE"
+    },
+    {
+      "id": 3,
+      "plate": "DEF-456",
+      "brand": "Chevrolet",
+      "model": "N300",
+      "year": 2021,
+      "odometer": 21000,
+      "status": "AVAILABLE"
+    },
+    {
+      "id": 4,
+      "plate": "GHI-01222",
+      "brand": "Kia",
+      "model": "K2700",
+      "year": 2018,
+      "odometer": 120000,
+      "status": "OUT_OF_SERVICE"
+    }
+  ],
+  "incidents": [
+    {
+      "id": 1,
+      "vehicleId": 2,
+      "driverId": 1,
+      "description": "Fuga de aceite en el motorss",
+      "severity": "HIGH",
+      "date": "2023-10-25T08:30:00Z"
+    },
+    {
+      "id": 2,
+      "vehicleId": 1,
+      "driverId": 1,
+      "description": "Luz trasera rota",
+      "severity": "LOW",
+      "date": "2023-10-26T14:15:00Z"
+    }
+  ],
+  "inspections": [
+    {
+      "id": 1,
+      "vehicleId": 1,
+      "inspectorId": 1,
+      "date": "2026-10-09T19:24",
+      "items": [
+        {
+          "name": "Frenos",
+          "status": "OK"
+        },
+        {
+          "name": "Luces",
+          "status": "OK"
+        }
+      ],
+      "observations": "Todo en orden"
+    },
+    {
+      "id": 2,
+      "vehicleId": 3,
+      "inspectorId": 1,
+      "date": "2023-10-27T07:30:00Z",
+      "items": [
+        {
+          "name": "Frenos",
+          "status": "FAIL"
+        },
+        {
+          "name": "Llantas",
+          "status": "OK"
+        }
+      ],
+      "observations": "Pastillas de freno desgastadas"
+    }
+  ],
+  "maintenanceOrders": [
+    {
+      "id": 1,
+      "vehicleId": 2,
+      "type": "CORRECTIVE",
+      "description": "Reparación de fuga de aceitess",
+      "scheduledDate": "2023-10-28T09:00:00Z",
+      "cost": 250,
+      "status": "PENDING"
+    },
+    {
+      "id": 2,
+      "vehicleId": 3,
+      "type": "PREVENTIVE",
+      "description": "Cambio de pastillas de freno",
+      "scheduledDate": "2023-10-29T10:00:00Z",
+      "cost": 120,
+      "status": "PENDING"
+    }
+  ],
+  "telemetry": [
+    {
+      "id": 1,
+      "vehicleId": 1,
+      "timestamp": "2023-10-27T12:00:00Z",
+      "latitude": -12.0464,
+      "longitude": -77.0428,
+      "speed": 60,
+      "fuelLevel": 75,
+      "engineTemperature": 90
+    },
+    {
+      "id": 2,
+      "vehicleId": 3,
+      "timestamp": "2023-10-27T12:05:00Z",
+      "latitude": -12.0564,
+      "longitude": -77.0528,
+      "speed": 45,
+      "fuelLevel": 50,
+      "engineTemperature": 88
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "email": "conductor@motus.com",
+      "password": "123456",
+      "name": "Kevin López",
+      "role": "DRIVER",
+      "licenseNumber": "Q12345678"
+    },
+    {
+      "id": 2,
+      "email": "jefe@motus.com",
+      "password": "123456",
+      "name": "María Torres",
+      "role": "FLEET_MANAGER",
+      "employeeCode": "EMP-001"
+    }
+  ]
+}

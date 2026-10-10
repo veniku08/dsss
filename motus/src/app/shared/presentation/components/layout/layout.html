@@ -1,0 +1,124 @@
+<div class="app-layout">
+
+  <div
+    class="sidebar-overlay"
+    [class.visible]="mobileMenuOpen() && isMobile()"
+    (click)="closeMobileMenu()">
+  </div>
+
+  <aside
+    class="sidebar"
+    [class.mobile-open]="mobileMenuOpen()"
+    [class.mobile]="isMobile()">
+
+    <div class="sidebar-brand">
+      <div class="brand-icon">🚗</div>
+      <div class="brand-text">
+        <h1>MOTUS</h1>
+        <p>Gestión proactiva de flotas</p>
+      </div>
+      <button class="close-mobile-btn" (click)="closeMobileMenu()" *ngIf="isMobile()">✕</button>
+    </div>
+
+    <nav class="sidebar-nav">
+
+      <ng-container *ngIf="isManager()">
+        <p class="nav-section">PRINCIPAL</p>
+
+        <a routerLink="/fleet" routerLinkActive="active" class="nav-item">
+          <span class="nav-icon">🚗</span>
+          <span class="nav-label">Gestión de flota</span>
+        </a>
+
+        <a routerLink="/inspections" routerLinkActive="active" class="nav-item">
+          <span class="nav-icon">📋</span>
+          <span class="nav-label">Inspecciones</span>
+        </a>
+
+        <a routerLink="/incidents" routerLinkActive="active" class="nav-item">
+          <span class="nav-icon">⚠️</span>
+          <span class="nav-label">Incidencias</span>
+        </a>
+
+        <a routerLink="/maintenance" routerLinkActive="active" class="nav-item">
+          <span class="nav-icon">🔧</span>
+          <span class="nav-label">Mantenimiento</span>
+        </a>
+
+        <a routerLink="/telemetry" routerLinkActive="active" class="nav-item">
+          <span class="nav-icon">📊</span>
+          <span class="nav-label">Operaciones</span>
+        </a>
+      </ng-container>
+
+      <ng-container *ngIf="isDriver()">
+        <p class="nav-section">MI PANEL</p>
+
+        <a routerLink="/driver/dashboard" routerLinkActive="active" class="nav-item">
+          <span class="nav-icon">🏠</span>
+          <span class="nav-label">Mi panel</span>
+        </a>
+
+        <a routerLink="/driver/my-vehicle" routerLinkActive="active" class="nav-item">
+          <span class="nav-icon">🚗</span>
+          <span class="nav-label">Mi vehículo</span>
+        </a>
+
+        <a routerLink="/driver/my-incidents" routerLinkActive="active" class="nav-item">
+          <span class="nav-icon">⚠️</span>
+          <span class="nav-label">Mis incidencias</span>
+        </a>
+
+        <p class="nav-section">ACCIONES</p>
+
+        <a routerLink="/driver/inspection" routerLinkActive="active" class="nav-item">
+          <span class="nav-icon">📋</span>
+          <span class="nav-label">Nueva inspección</span>
+        </a>
+
+        <a routerLink="/driver/incident" routerLinkActive="active" class="nav-item">
+          <span class="nav-icon">🚨</span>
+          <span class="nav-label">Reportar incidencia</span>
+        </a>
+      </ng-container>
+
+    </nav>
+  </aside>
+
+  <div class="main-wrapper">
+    <header class="top-header">
+
+      <div class="header-left">
+        <button class="hamburger-btn" (click)="toggleMobileMenu()" *ngIf="isMobile()">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        <div class="breadcrumb">
+          <span class="breadcrumb-icon">🏠</span>
+          <span class="breadcrumb-text">{{ breadcrumbTitle }}</span>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <app-language-switcher></app-language-switcher>
+
+        <div class="user-menu">
+          <div class="user-info">
+            <span class="user-name">{{ user()?.name }}</span>
+            <span class="user-role">
+              {{ user()?.role === 'DRIVER' ? 'Conductor' : 'Jefe de flota' }}
+            </span>
+          </div>
+          <button class="icon-button" (click)="logout()" title="Cerrar sesión">🚪</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="content-area">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+
+</div>

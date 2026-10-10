@@ -1,0 +1,70 @@
+<div class="login-page">
+  <div class="login-container">
+
+    <!-- Lado izquierdo: branding -->
+    <div class="login-brand">
+      <div class="brand-logo">🚗</div>
+      <h1>MOTUS</h1>
+      <p>Gestión proactiva de flotas</p>
+    </div>
+
+    <!-- Lado derecho: formulario -->
+    <div class="login-form-wrapper">
+      <h2>Iniciar sesión</h2>
+      <p class="subtitle">Accede a tu cuenta para continuar</p>
+
+      <form (ngSubmit)="onSubmit(form)" #form="ngForm">
+        <div class="form-group">
+          <label for="email">Correo electrónico</label>
+          <input
+            id="email"
+            type="email"
+            [(ngModel)]="credentials.email"
+            name="email"
+            required
+            email
+            placeholder="usuario@motus.com"
+            autocomplete="email">
+        </div>
+
+        <div class="form-group">
+          <label for="password">Contraseña</label>
+          <input
+            id="password"
+            type="password"
+            [(ngModel)]="credentials.password"
+            name="password"
+            required
+            minlength="6"
+            placeholder="••••••"
+            autocomplete="current-password">
+        </div>
+
+        <div class="error-message" *ngIf="errorMessage()">
+          ⚠️ {{ errorMessage() }}
+        </div>
+
+        <button
+          type="submit"
+          class="btn-login"
+          [disabled]="!form.valid || loading()">
+          {{ loading() ? 'Iniciando sesión...' : 'Iniciar sesión' }}
+        </button>
+      </form>
+
+      <!-- Usuarios de prueba -->
+      <div class="demo-section">
+        <p class="demo-title">Usuarios de prueba</p>
+        <div class="demo-buttons">
+          <button type="button" class="demo-btn driver" (click)="fillDemo('DRIVER')">
+            🚗 Conductor
+          </button>
+          <button type="button" class="demo-btn manager" (click)="fillDemo('FLEET_MANAGER')">
+            📊 Jefe de flota
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

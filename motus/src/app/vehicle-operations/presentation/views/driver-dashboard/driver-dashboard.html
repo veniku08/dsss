@@ -1,0 +1,80 @@
+<div class="driver-dashboard">
+  <!-- Bienvenida -->
+  <div class="welcome-card">
+    <div class="welcome-text">
+      <h1>Hola, {{ user()?.name }} 👋</h1>
+      <p>Bienvenido a tu panel de conductor</p>
+    </div>
+    <div class="welcome-badge">
+      <span class="badge-icon">🎯</span>
+      <span class="badge-text">Conductor activo</span>
+    </div>
+  </div>
+
+  <!-- Tarjetas de estadísticas -->
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-icon incidents">⚠️</div>
+      <div class="stat-info">
+        <span class="stat-value">{{ totalIncidents() }}</span>
+        <span class="stat-label">Mis incidencias</span>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon inspections">📋</div>
+      <div class="stat-info">
+        <span class="stat-value">{{ totalInspections() }}</span>
+        <span class="stat-label">Mis inspecciones</span>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon vehicle">🚗</div>
+      <div class="stat-info">
+        <span class="stat-value vehicle-value">{{ currentVehicle() }}</span>
+        <span class="stat-label">Vehículo asignado</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Acciones rápidas -->
+  <h2 class="section-title">Acciones rápidas</h2>
+  <div class="actions-grid">
+    <a routerLink="/driver/inspection" class="action-card">
+      <span class="action-icon">📋</span>
+      <div class="action-text">
+        <span class="action-title">Nueva inspección</span>
+        <span class="action-desc">Checklist pre-viaje</span>
+      </div>
+      <span class="action-arrow">→</span>
+    </a>
+
+    <a routerLink="/driver/incident" class="action-card">
+      <span class="action-icon">⚠️</span>
+      <div class="action-text">
+        <span class="action-title">Reportar incidencia</span>
+        <span class="action-desc">Falla o accidente</span>
+      </div>
+      <span class="action-arrow">→</span>
+    </a>
+
+    <a routerLink="/driver/my-vehicle" class="action-card">
+      <span class="action-icon">🚗</span>
+      <div class="action-text">
+        <span class="action-title">Mi vehículo</span>
+        <span class="action-desc">Estado actual</span>
+      </div>
+      <span class="action-arrow">→</span>
+    </a>
+
+    <a routerLink="/driver/my-incidents" class="action-card">
+      <span class="action-icon">📜</span>
+      <div class="action-text">
+        <span class="action-title">Mis incidencias</span>
+        <span class="action-desc">Historial completo</span>
+      </div>
+      <span class="action-arrow">→</span>
+    </a>
+  </div>
+</div>

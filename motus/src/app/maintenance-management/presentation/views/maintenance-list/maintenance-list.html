@@ -1,0 +1,76 @@
+<div class="maintenance-container">
+  <div class="page-header">
+    <div>
+      <h2>Gestión de mantenimiento</h2>
+      <p class="subtitle">Programa y controla los mantenimientos de la flota</p>
+    </div>
+    <button class="btn-primary" (click)="openCreate()">
+      + Nueva orden
+    </button>
+  </div>
+
+  <div class="toolbar">
+    <input
+      type="text"
+      class="search-input"
+      placeholder="🔍 Buscar por vehículo o descripción..."
+      [(ngModel)]="searchTerm"
+      (input)="applyFilters()">
+    <select class="filter-select" [(ngModel)]="statusFilter" (change)="applyFilters()">
+      <option value="ALL">Todos los estados</option>
+      <option value="PENDING">Pendiente</option>
+      <option value="IN_PROGRESS">En Progreso</option>
+      <option value="COMPLETED">Completado</option>
+    </select>
+  </div>
+
+  <table class="data-table">
+    <thead>
+    <tr>
+      <th>Vehículo</th>
+      <th>Tipo</th>
+      <th>Descripción</th>
+      <th>Costo</th>
+      <th>Estado</th>
+      <th>Programado</th>
+      <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let o of filteredOrders">
+      <td>{{ getVehicleLabel(o.vehicleId) }}</td>
+      <td>
+          <span class="badge" [ngClass]="o.type.toLowerCase()">
+            {{ getTypeLabel(o.type) }}
+          </span>
+      </td>
+      <td class="truncate">{{ o.description }}</td>
+      <td>S/ {{ o.cost | number:'1.2-2' }}</td>
+      <td>
+          <span class="badge" [ngClass]="o.status.toLowerCase().replace('_', '-')">
+            {{ getStatusLabel(o.status) }}
+          </span>
+      </td>
+      <td>{{ o.scheduledDate | date:'short' }}</td>
+      <td class="actions">
+        <button class="btn-icon edit" (click)="openEdit(o)" title="Editar">✏️</button>
+        <button class="btn-icon delete" (click)="delete(o.id)" title="Eliminar">🗑️</button>
+      </td>
+    </tr>
+    <tr *ngIf="filteredOrders.length === 0">
+      <td colspan="7" class="empty-state">No hay órdenes de mantenimiento</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<app-dialog
+  [title]="editingOrder.id === 0 ? 'Nueva Orden de Mantenimiento' : 'Editar Orden de Mantenimiento'"
+  [visible]="showDialog"
+  (close)="close()">
+  <app-maintenance-form
+    [order]="editingOrder"
+    (save)="save($event)"
+    (cancel)="close()">
+  </app-maintenance-form>
+</app-dialog>
