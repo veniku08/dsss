@@ -1,0 +1,37 @@
+<div class="my-vehicle">
+  <h2>Mi vehículo asignado</h2>
+
+  <div *ngIf="loading()" class="loading">Cargando...</div>
+
+  <div *ngIf="!loading() && vehicle()" class="vehicle-card">
+    <div class="vehicle-header">
+      <div class="vehicle-plate">{{ vehicle()!.plate }}</div>
+      <span class="status-badge" [ngClass]="vehicle()!.status.toLowerCase()">
+        {{ vehicle()!.status }}
+      </span>
+    </div>
+
+    <div class="vehicle-info-grid">
+      <div class="info-item">
+        <span class="info-label">Marca</span>
+        <span class="info-value">{{ vehicle()!.brand }}</span>
+      </div>
+      <div class="info-item">
+        <span class="info-label">Modelo</span>
+        <span class="info-value">{{ vehicle()!.model }}</span>
+      </div>
+      <div class="info-item">
+        <span class="info-label">Año</span>
+        <span class="info-value">{{ vehicle()!.year }}</span>
+      </div>
+      <div class="info-item">
+        <span class="info-label">Odómetro</span>
+        <span class="info-value">{{ vehicle()!.odometer }} km</span>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="!loading() && !vehicle()" class="empty-state">
+    <p>No tienes un vehículo asignado.</p>
+  </div>
+</div>

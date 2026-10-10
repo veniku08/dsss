@@ -1,0 +1,51 @@
+<form (ngSubmit)="onSubmit()" #form="ngForm" class="form-grid">
+
+  <div class="form-group">
+    <label>Vehículo</label>
+    <select [(ngModel)]="order.vehicleId" name="vehicleId" required>
+      <option [ngValue]="0" disabled>-- Selecciona un vehículo --</option>
+      <option *ngFor="let v of vehicles" [ngValue]="v.id">
+        {{ v.plate }} - {{ v.brand }} {{ v.model }}
+      </option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label>Tipo de mantenimiento</label>
+    <select [(ngModel)]="order.type" name="type" required>
+      <option value="PREVENTIVE">Preventivo</option>
+      <option value="CORRECTIVE">Correctivo</option>
+    </select>
+  </div>
+
+  <div class="form-group full-width">
+    <label>Descripción</label>
+    <textarea [(ngModel)]="order.description" name="description" required rows="3"
+              placeholder="Ej: Cambio de aceite y filtros..."></textarea>
+  </div>
+
+  <div class="form-group">
+    <label>Costo estimado (S/)</label>
+    <input type="number" [(ngModel)]="order.cost" name="cost" required min="0" step="0.01">
+  </div>
+
+  <div class="form-group">
+    <label>Fecha programada</label>
+    <input type="datetime-local" [(ngModel)]="order.scheduledDate" name="scheduledDate" required>
+  </div>
+
+  <div class="form-group">
+    <label>Estado</label>
+    <select [(ngModel)]="order.status" name="status" required>
+      <option value="PENDING">Pendiente</option>
+      <option value="IN_PROGRESS">En progreso</option>
+      <option value="COMPLETED">Completado</option>
+    </select>
+  </div>
+
+  <div class="form-actions">
+    <button type="button" class="btn-cancel" (click)="onCancel()">Cancelar</button>
+    <button type="submit" class="btn-save" [disabled]="!form.valid">Guardar</button>
+  </div>
+
+</form>

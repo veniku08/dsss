@@ -1,0 +1,22 @@
+<div class="my-incidents">
+  <h2>Mis incidencias reportadas</h2>
+
+  <div class="incident-list" *ngIf="incidents().length > 0; else noIncidents">
+    <div class="incident-card" *ngFor="let i of incidents()">
+      <div class="incident-header">
+        <span class="severity-badge" [ngClass]="i.severity.toLowerCase()">{{ i.severity }}</span>
+        <span class="incident-date">{{ i.date | date:'short' }}</span>
+      </div>
+      <p class="incident-desc">{{ i.description }}</p>
+      <div class="incident-meta">
+        <span>Vehículo #{{ i.vehicleId }}</span>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #noIncidents>
+    <div class="empty-state">
+      <p>No has reportado incidencias aún.</p>
+    </div>
+  </ng-template>
+</div>

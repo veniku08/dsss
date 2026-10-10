@@ -1,0 +1,8 @@
+{
+  "/api/v1/vehicles": "/vehicles",
+  "/api/v1/incidents": "/incidents",
+  "/api/v1/inspections": "/inspections",
+  "/api/v1/maintenance-orders": "/maintenanceOrders",
+  "/api/v1/telemetry": "/telemetry",
+  "/api/v1/users": "/users"
+}
